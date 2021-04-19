@@ -32,6 +32,38 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        if(isset($_POST['token'])){
+          $captcha=$_POST['token'];
+        }
+          
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+        $data = [
+                'secret' => "6LcxdrAaAAAAAM6b0DdEqtgbPr0GFuVhFZzSG7uG",
+                'response' => $request->get('recaptcha'),
+                'remoteip' => $remoteip
+              ];
+        $options = [
+                'http' => [
+                  'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                  'method' => 'POST',
+                  'content' => http_build_query($data)
+                ]
+            ];
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        $resultJson = json_decode($result);
+
+        if ($resultJson->success != true) {
+                return back()->with('msg', 'ReCaptcha Error');
+                }
+        if ($resultJson->score >= 0.3) {
+                //Validation was successful, add your form submission logic here
+                return back()->with('msg', 'Thanks for your message!');
+        } else {
+                return back()->with('msg', 'ReCaptcha Error');
+        }
+
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users',
         ]);

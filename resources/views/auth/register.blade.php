@@ -126,11 +126,9 @@ input:focus {
                 <p>Soyez-prêts !</p>
               </div>
               <div class="input">
-                <input type="text" class="button" id="email" name="email" placeholder="VOTRE@MAIL.COM">
-                <input type="submit" id="submit" value="S'INSCRIRE" class="button g-recaptcha" 
-                data-sitekey="6LcxdrAaAAAAAAueNWoROgntxDtWGCqgIg0yBhgX" 
-                data-callback='onSubmit' 
-                data-action='submit'>
+                <input required type="text" class="button" id="email" name="email" placeholder="VOTRE@MAIL.COM">
+                <input type="hidden" name="recaptcha" id="recaptcha">
+                <input type="submit" id="submit" value="S'INSCRIRE" class="button">
               </div>
               <div class="description">
                 <p>En vous inscrivant, vous concédez à recevoir des nouvelles par email concernant Challenge For Earth.</p>
@@ -143,11 +141,15 @@ input:focus {
             </form>
         </div>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script>
-       function onSubmit(token) {
-         document.getElementById("demo-form").submit();
-       }
-    </script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcxdrAaAAAAAAueNWoROgntxDtWGCqgIg0yBhgX"></script>
+<script>
+         grecaptcha.ready(function() {
+             grecaptcha.execute('{{ config('services.recaptcha.sitekey') }}', {action: 'contact'}).then(function(token) {
+                if (token) {
+                  document.getElementById('recaptcha').value = token;
+                }
+             });
+         });
+</script>
   </body>
 </html>
