@@ -55,7 +55,7 @@ class RegisteredUserController extends Controller
         $resultJson = json_decode($result);
 
         $userExists = User::where('email', $request->email)->get();
-        if($userExists){
+        if(!empty($userExists)){
             return view('auth.register', ['msg' => "Votre email est déjà dans notre base de données ;-)"]);
         }else{
             if($resultJson->score >= 0.3 && $resultJson->success == true){
