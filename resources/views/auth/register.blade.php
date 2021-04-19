@@ -4,6 +4,7 @@
     <title>Challenge For Earth</title>
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="{{ URL::asset('/images/logo.png') }}" />
     <style>
 
 body {
@@ -21,7 +22,7 @@ form {
 
 
 .header {
-  font-size: 35px;
+  font-size: 25px;
   text-transform: uppercase;
   letter-spacing: 5px;
 }
@@ -86,34 +87,51 @@ input:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    margin-top: 20px;
 }
 
 .row {
     margin: 0;
     padding: 0;
 }
+
+#bg {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  filter: brightness(50%);
+}
+.grecaptcha-badge {
+display: none !important;
+visibility: hidden !important;
+}
     </style>
   </head>
+    <video muted autoplay loop id="bg">
+      <source src="{{ URL::asset('/images/bg_forest.mp4') }}" type="video/mp4">
+    </video>
   <body class="content">
     <div class="row">
         <div class="col-12">
+            <img src="{{ URL::asset('/images/logo.png') }}" alt="logo Challenge For Earth" style="width: 30%;" />
             <form action="/register" method="post" name="sign up for beta form">
                 @csrf
               <div class="header">
                  <p>Ne manquez pas le top départ</p>
               </div>
               <div class="description">
-                <p>Relevez des défis à votre échelle, seul·e ou en groupe.</p>
-                <p>Challenge For Earth est en cours de conception, lancement en Juin.</p>
+                <p>Relevez des défis à votre échelle, seul·e ou en communauté.</p>
+                <p>Challenge For Earth est en préparation, lancement en Juin.</p>
                 <p>Soyez-prêts !</p>
               </div>
               <div class="input">
                 <input type="text" class="button" id="email" name="email" placeholder="VOTRE@MAIL.COM">
                 <input type="submit" id="submit" value="S'INSCRIRE" class="button g-recaptcha" 
-        data-sitekey="reCAPTCHA_site_key" 
-        data-callback='onSubmit' 
-        data-action='submit'>
+                data-sitekey="6LcxdrAaAAAAAAueNWoROgntxDtWGCqgIg0yBhgX" 
+                data-callback='onSubmit' 
+                data-action='submit'>
               </div>
               <div class="description">
                 <p>En vous inscrivant, vous concédez à recevoir des nouvelles par email concernant Challenge For Earth.</p>
