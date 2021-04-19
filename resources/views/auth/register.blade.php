@@ -10,7 +10,6 @@
     <style>
 
 body {
-  background: #F8A434;
   font-family: 'Nunito', sans-serif;
   font-weight: bold;
   color: #FDFCFB;
@@ -106,10 +105,6 @@ input:focus {
   min-width: 100%;
   min-height: 100%;
   filter: brightness(50%);
-}
-.grecaptcha-badge {
-display: none !important;
-visibility: hidden !important;
 }
     </style>
   </head>
