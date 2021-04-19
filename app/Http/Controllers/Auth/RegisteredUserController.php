@@ -38,6 +38,7 @@ class RegisteredUserController extends Controller
           
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $remoteip = $_SERVER['REMOTE_ADDR'];
+        dd($request->recaptcha);
         $data = [
                 'secret' => "6LcxdrAaAAAAAM6b0DdEqtgbPr0GFuVhFZzSG7uG",
                 'response' => $request->get('recaptcha'),

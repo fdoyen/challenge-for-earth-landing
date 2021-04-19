@@ -115,7 +115,7 @@ input:focus {
     <div class="row">
         <div class="col-12">
             <img src="{{ URL::asset('/images/logo.png') }}" alt="logo Challenge For Earth" style="width: 30%;" />
-            <form action="/register" method="post" name="sign up for beta form">
+            <form action="/register" method="post">
                 @csrf
               <div class="header">
                  <p>Ne manquez pas le top départ</p>
@@ -144,7 +144,7 @@ input:focus {
     <script src="https://www.google.com/recaptcha/api.js?render=6LcxdrAaAAAAAAueNWoROgntxDtWGCqgIg0yBhgX"></script>
 <script>
          grecaptcha.ready(function() {
-             grecaptcha.execute('{{ config('services.recaptcha.sitekey') }}', {action: 'contact'}).then(function(token) {
+             grecaptcha.execute('6LcxdrAaAAAAAAueNWoROgntxDtWGCqgIg0yBhgX', {action: 'register'}).then(function(token) {
                 if (token) {
                   document.getElementById('recaptcha').value = token;
                 }
