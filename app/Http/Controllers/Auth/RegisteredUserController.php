@@ -54,16 +54,6 @@ class RegisteredUserController extends Controller
         $result = file_get_contents($url, false, $context);
         $resultJson = json_decode($result);
 
-        if ($resultJson->success != true) {
-                return back()->with('msg', 'ReCaptcha Error');
-                }
-        if ($resultJson->score >= 0.3) {
-                //Validation was successful, add your form submission logic here
-                return back()->with('msg', 'Thanks for your message!');
-        } else {
-                return back()->with('msg', 'ReCaptcha Error');
-        }
-
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users',
         ]);
@@ -76,7 +66,10 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-
-        return view('auth.register', ['msg' => "Merci de votre inscription !"]);
+        if($resultJson->score >= 0.3 && $resultJson->success == true){
+            return view('auth.register', ['msg' => "Merci de votre inscription !"]);
+        }else{
+            return view('auth.register', ['msg' => "Veuillez réessayer."]);
+        }
     }
 }
