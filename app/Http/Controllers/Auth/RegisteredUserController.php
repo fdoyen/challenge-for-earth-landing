@@ -54,20 +54,19 @@ class RegisteredUserController extends Controller
         $result = file_get_contents($url, false, $context);
         $resultJson = json_decode($result);
 
-        $request->validate([
-            'email' => 'required|string|email|max:255|unique:users',
-        ]);
-
-        $user = User::create([
-            'email' => $request->email,
-        ]);
-
-        event(new Registered($user));
-
-        if($resultJson->score >= 0.3 && $resultJson->success == true){
-            return view('auth.register', ['msg' => "Merci de votre inscription !"]);
+        $userExists = User::where('email', $request->email)->get();
+        if($userExists){
+            return view('auth.register', ['msg' => "Votre email est déjà dans notre base de données ;-)"]);
         }else{
-            return view('auth.register', ['msg' => "Veuillez réessayer."]);
+            if($resultJson->score >= 0.3 && $resultJson->success == true){
+                $user = User::create([
+                    'email' => $request->email,
+                ]);
+                event(new Registered($user));
+                return view('auth.register', ['msg' => "Merci de votre inscription !"]);
+            }else{
+                return view('auth.register', ['msg' => "Veuillez réessayer."]);
+            } 
         }
     }
 }
