@@ -106,6 +106,12 @@ input:focus {
   min-height: 100%;
   filter: brightness(50%);
 }
+
+.grecaptcha-badge {
+  display: none !important;
+  visibility: hidden !important;
+}
+
     </style>
   </head>
     <video muted autoplay loop id="bg">
