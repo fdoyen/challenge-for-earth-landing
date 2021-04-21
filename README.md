@@ -1,1 +1,1 @@
-# challenge-the-earth
+# challenge-for-earth
