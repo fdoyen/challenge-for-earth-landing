@@ -139,7 +139,15 @@ input:focus {
               <div class="description">
                 <p>En vous inscrivant, vous concédez à recevoir des nouvelles par email concernant Challenge For Earth.</p>
                 <p>
-                  {{ Session::get('msg'); }}
+                      @if(app('request')->input('msg') === "already_exists")
+                        Votre email est déjà dans notre base de données ;-)
+                      @endif
+                      @if(app('request')->input('msg') === "valid")
+                      Merci de votre inscription !
+                      @endif
+                      @if(app('request')->input('msg') === "recaptcha_error")
+                        Le recaptcha Google n'a pas fonctionné. Veuillez réessayer.
+                      @endif
                 </p>
               </div>
             </form>
