@@ -121,7 +121,7 @@ input:focus {
     <div class="row">
         <div class="col-12">
             <img src="{{ URL::asset('/images/logo.png') }}" alt="logo Challenge For Earth" style="width: 30%;" />
-            <form action="/register" method="post">
+            <form action="{{ route('register.store') }}" method="post">
                 @csrf
               <div class="header">
                  <p>Ne manquez pas le top départ</p>
