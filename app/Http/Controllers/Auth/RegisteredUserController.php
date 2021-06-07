@@ -65,7 +65,7 @@ class RegisteredUserController extends Controller
                 event(new Registered($user));
                 return redirect()->route('register.store')->with('msg', "Merci de votre inscription !");
             }else{
-                return redirect()->route('register.store')->with('msg', "Veuillez réessayer.");
+                return redirect()->route('register.store')->with('msg', "Le recaptcha Google n'a pas fonctionné. Veuillez réessayer.");
             } 
         }
     }

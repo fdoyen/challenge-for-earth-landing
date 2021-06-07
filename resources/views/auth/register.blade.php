@@ -139,9 +139,7 @@ input:focus {
               <div class="description">
                 <p>En vous inscrivant, vous concédez à recevoir des nouvelles par email concernant Challenge For Earth.</p>
                 <p>
-                    @isset($msg)
-                        {{ $msg }}
-                    @endisset
+                  Session::get('msg');
                 </p>
               </div>
             </form>
