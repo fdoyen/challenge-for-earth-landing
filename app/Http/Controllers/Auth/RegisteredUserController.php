@@ -56,16 +56,16 @@ class RegisteredUserController extends Controller
 
         $userExists = User::where('email', $request->email)->get();
         if(!$userExists->isEmpty()){
-            return view('auth.register', ['msg' => "Votre email est déjà dans notre base de données ;-)"]);
+            return redirect()->route('auth.register', ['msg' => "Votre email est déjà dans notre base de données ;-)"]);
         }else{
             if($resultJson->score >= 0.3 && $resultJson->success == true){
                 $user = User::create([
                     'email' => $request->email,
                 ]);
                 event(new Registered($user));
-                return view('auth.register', ['msg' => "Merci de votre inscription !"]);
+                return redirect()->route('auth.register', ['msg' => "Merci de votre inscription !"]);
             }else{
-                return view('auth.register', ['msg' => "Veuillez réessayer."]);
+                return redirect()->route('auth.register', ['msg' => "Veuillez réessayer."]);
             } 
         }
     }
